@@ -3,6 +3,7 @@ using ICustomerLib;
 using CustomerLibrary;
 namespace CustomerFactory
 {
+    //Simple Factory Pattern 
     public class Factory
     {
         public ICustomer Create(int CustomerType)
