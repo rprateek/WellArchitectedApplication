@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccess;
 using ICustomerLib;
+
 namespace CustomerLibrary
 {
 
@@ -15,6 +16,11 @@ namespace CustomerLibrary
         {
             // Virtual function created so that it can be override by child class
             //let this be defined by child classes. 
+        }
+        public ICustomer Clone() 
+        {
+            // Introducing Memberwise clone in base class to be able to clone any customer objects created 
+            return (ICustomer)this.MemberwiseClone();
         }
 
     }
@@ -39,7 +45,7 @@ namespace CustomerLibrary
             {
                 throw new Exception("Bill Date is not correct");
             }
-        }
+        }      
 
     }
 
