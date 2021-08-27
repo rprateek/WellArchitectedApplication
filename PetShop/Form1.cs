@@ -14,7 +14,7 @@ namespace PetShop
         private void cmdAdd_Click(object sender, EventArgs e)
         {
             ICustomer iCust = null;
-            iCust = Factory.Create(cboCustType.SelectedIndex);
+            iCust = Factory<ICustomer>.Create(cboCustType.SelectedIndex.ToString());
 
 
             iCust.FullName = txtFullName.Text;

@@ -9,35 +9,26 @@ using System.Configuration;
 namespace CustomerFactory
 {
     //Simple Factory Pattern 
-    // To improve perfomance we use singelton pattern so that it 
-    // Can only be instantiated once
+    // To improve perfomance we use singelton pattern 
+    // Follow IOC principle using Dependency Injection via Unity 
+    // Make this class Generic so that the logic is decoupled from the data type.
 
-    public static class Factory
+    public static class Factory<INJECTTYPE>
     {
-        //static List<ICustomer> customers = null;
-       static IUnityContainer oUnitCont = null;
+        static IUnityContainer oUnitCont = null;
         static Factory()
         {
-            //oUnitCont = new UnityContainer();
-
-          //  customers.Add(new Visitor());
-            //customers.Add(new Customer());            
-
-            // We can directly load the unity container here 
-            //oUnitCont.RegisterType<ICustomer, Visitor> ("0"); //You can get the value from config 
-            //oUnitCont.RegisterType<ICustomer, Customer>("1");
-
-
+            
             if (ConfigurationManager.GetSection("unity") != null)
             {
-                //Or We can load the entityes to be injected from the configuration file
+                //Or We can load the entities to be injected from the configuration file
                 oUnitCont.LoadConfiguration();
             }
 
         }               
-        public static ICustomer Create(int CustomerType)
+        public static INJECTTYPE Create(string Type) // will return whatever type is injected
         {            
-            return oUnitCont.Resolve<ICustomer>(CustomerType.ToString()).Clone();
+            return oUnitCont.Resolve<INJECTTYPE>(Type.ToString()); //resolves to any type injected
 
         }       
 
