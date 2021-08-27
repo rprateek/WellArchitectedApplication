@@ -1,12 +1,9 @@
 ﻿using System;
-using CustomerLibrary;
-using System.Collections.Generic;
-using ICustomerLib;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using System.Configuration;
 
-namespace CustomerFactory
+namespace Factory
 {
     //Simple Factory Pattern 
     // To improve perfomance we use singelton pattern 
@@ -21,6 +18,7 @@ namespace CustomerFactory
             
             if (ConfigurationManager.GetSection("unity") != null)
             {
+                oUnitCont = new UnityContainer();
                 //Or We can load the entities to be injected from the configuration file
                 oUnitCont.LoadConfiguration();
             }

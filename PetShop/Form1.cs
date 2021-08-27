@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ICustomerLib;
-using CustomerFactory;
+using Factory;
 namespace PetShop
 {
     public partial class frmCustomer : Form
@@ -14,7 +14,7 @@ namespace PetShop
         private void cmdAdd_Click(object sender, EventArgs e)
         {
             ICustomer iCust = null;
-            iCust = Factory<ICustomer>.Create(cboCustType.SelectedIndex.ToString());
+            iCust = Factory<ICustomer>.Create(cboCustType.SelectedIndex.ToString()).Clone();
 
 
             iCust.FullName = txtFullName.Text;
@@ -24,7 +24,7 @@ namespace PetShop
             iCust.BillAmount = Convert.ToDecimal(txtBillAmount.Text);
 
 
-
+           
 
         }
     }

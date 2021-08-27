@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomerLibrary\CustomerLibrary.csproj" />
-    <ProjectReference Include="..\ICustomerLIb\ICustomerLIb.csproj" />
+    <ProjectReference Include="..\ICustomerLIb\ICustomerLib.csproj" />
   </ItemGroup>
 
 </Project>
