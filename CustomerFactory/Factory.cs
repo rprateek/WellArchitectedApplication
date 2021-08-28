@@ -5,7 +5,7 @@ using System.Configuration;
 
 namespace Factory
 {
-    //Simple Factory Pattern 
+    //Design pattern :- Simple Factory Pattern 
     // To improve perfomance we use singelton pattern 
     // Follow IOC principle using Dependency Injection via Unity 
     // Make this class Generic so that the logic is decoupled from the data type.
@@ -15,7 +15,7 @@ namespace Factory
         static IUnityContainer oUnitCont = null;
         static Factory()
         {
-            
+
             if (ConfigurationManager.GetSection("unity") != null)
             {
                 oUnitCont = new UnityContainer();
@@ -23,13 +23,12 @@ namespace Factory
                 oUnitCont.LoadConfiguration();
             }
 
-        }               
+        }
         public static INJECTTYPE Create(string Type) // will return whatever type is injected
-        {            
+        {
             return oUnitCont.Resolve<INJECTTYPE>(Type.ToString()); //resolves to any type injected
 
-        }       
-
+        }
 
     }
 }

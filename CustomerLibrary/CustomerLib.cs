@@ -45,6 +45,10 @@ namespace CustomerLibrary
             {
                 throw new Exception("Bill Date is not correct");
             }
+            if (Address.Length==0)
+            {
+                throw new Exception("Address is required");
+            }
         }
 
     }
