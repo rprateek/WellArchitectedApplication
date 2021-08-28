@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomerLibrary\CustomerLibrary.csproj" />
+    <ProjectReference Include="..\ICustomerLIb\Interfaces.csproj" />
+    <ProjectReference Include="..\ValidationAlgos\ValidationLogic.csproj" />
   </ItemGroup>
 
 </Project>

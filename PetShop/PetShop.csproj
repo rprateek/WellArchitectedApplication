@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomerFactory\CustomerFactory.csproj" />
-    <ProjectReference Include="..\ICustomerLIb\ICustomerLib.csproj" />
+    <ProjectReference Include="..\ICustomerLIb\Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

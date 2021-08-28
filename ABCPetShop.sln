@@ -12,9 +12,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop", "PetShop\PetShop.csproj", "{7C28CAA8-47D0-4BA0-AA02-07D64EEE535E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICustomerLib", "ICustomerLIb\ICustomerLib.csproj", "{16CD7928-3EE9-4A23-A23B-25469A37D83A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "ICustomerLIb\Interfaces.csproj", "{16CD7928-3EE9-4A23-A23B-25469A37D83A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerFactory", "CustomerFactory\CustomerFactory.csproj", "{9BB995EF-B78D-4030-8390-FB90C0031644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationLogic", "ValidationAlgos\ValidationLogic.csproj", "{BFEC3055-7FE7-425B-A6AB-982032528808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{9BB995EF-B78D-4030-8390-FB90C0031644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BB995EF-B78D-4030-8390-FB90C0031644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BB995EF-B78D-4030-8390-FB90C0031644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFEC3055-7FE7-425B-A6AB-982032528808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFEC3055-7FE7-425B-A6AB-982032528808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFEC3055-7FE7-425B-A6AB-982032528808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFEC3055-7FE7-425B-A6AB-982032528808}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

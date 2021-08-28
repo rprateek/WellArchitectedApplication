@@ -1,12 +1,21 @@
 ﻿using System;
 using DataAccess;
-using ICustomerLib;
+using Interfaces;
 
 namespace CustomerLibrary
 {
-
     public class CustomerBase : ICustomer
     {
+        //Create object of Interface validation
+        private IValidation<ICustomer> _validation = null;
+
+        //Inject the Validation strategy in the Customer object
+        //when the customer object is created it requies what type of validation strategy is required
+        public CustomerBase(IValidation<ICustomer> objVal)
+        {
+            _validation = objVal;
+        }
+
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
         public decimal BillAmount { get; set; }
@@ -16,6 +25,8 @@ namespace CustomerLibrary
         {
             // Virtual function created so that it can be override by child class
             //let this be defined by child classes. 
+            // Clalling the validatoin method and passing the current customer object to be validated
+            _validation.Validate(this);
         }
         public ICustomer Clone()
         {
@@ -26,45 +37,21 @@ namespace CustomerLibrary
     }
     public class Customer : CustomerBase
     {
-
-        public override void Validate() //overriding the virtual class created by CustomerBase
+        //In the individual child class creating the constructor to call the Validation 
+        //this is injecting Validation strategy here
+        public Customer(IValidation<ICustomer> objVal):base(objVal)
         {
-            if (FullName.Length == 0)
-            {
-                throw new Exception("Customer Full Name is required");
-            }
-            if (PhoneNumber.Length == 0)
-            {
-                throw new Exception("Customer Phone Number is required");
-            }
-            if (BillAmount == 0)
-            {
-                throw new Exception("Bill Amount is required");
-            }
-            if (BillDate >= DateTime.Now)
-            {
-                throw new Exception("Bill Date is not correct");
-            }
-            if (Address.Length==0)
-            {
-                throw new Exception("Address is required");
-            }
-        }
+
+        }        
 
     }
 
     public class Visitor : Customer
     {
-        public override void Validate()
+        //this is injecting Validation strategy here
+        public Visitor(IValidation<ICustomer> objVal):base(objVal)
         {
-            if (FullName.Length == 0)
-            {
-                throw new Exception("Customer Full Name is required");
-            }
-            if (PhoneNumber.Length == 0)
-            {
-                throw new Exception("Customer Phone Number is required");
-            }
-        }
+
+        }       
     }
 }

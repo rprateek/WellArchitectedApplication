@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ICustomerLib
+namespace Interfaces
 {
     public interface ICustomer
     {

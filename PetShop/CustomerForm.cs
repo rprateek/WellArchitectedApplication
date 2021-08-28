@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using ICustomerLib;
+using Interfaces;
 using Factory;
 namespace PetShop
 {
@@ -16,9 +16,17 @@ namespace PetShop
             try
             {
                 ICustomer iCust = null;
-                iCust = Factory<ICustomer>.Create(cboCustType.SelectedIndex.ToString()).Clone();
 
+                if (cboCustType.SelectedIndex==0)
+                {
+                    iCust = Factory<ICustomer>.Create("Visitor").Clone();
+                }
+                else 
+                {
+                    iCust = Factory<ICustomer>.Create("Customer").Clone();
+                }
 
+               
                 iCust.FullName = txtFullName.Text;
                 iCust.Address = txtAddress.Text;
                 iCust.PhoneNumber = txtPhoneNo.Text;
