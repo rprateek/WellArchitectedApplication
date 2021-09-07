@@ -1,5 +1,4 @@
 ﻿using System;
-using DataAccess;
 using Interfaces;
 
 namespace CustomerLibrary
@@ -46,7 +45,7 @@ namespace CustomerLibrary
 
     }
 
-    public class Visitor : Customer
+    public class Visitor : CustomerBase
     {
         //this is injecting Validation strategy here
         public Visitor(IValidation<ICustomer> objVal):base(objVal)

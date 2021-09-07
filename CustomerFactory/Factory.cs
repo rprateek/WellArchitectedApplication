@@ -5,6 +5,7 @@ using System.Configuration;
 using Interfaces;
 using CustomerLibrary;
 using ValidationLogic;
+
 namespace Factory
 {
     //Design pattern :- Simple Factory Pattern 
@@ -24,18 +25,18 @@ namespace Factory
                 {
                     oUnitCont = new UnityContainer();
                     //Here we are registering different customer types and injecting the validation methods accordingly
-
-                    oUnitCont.RegisterType<ICustomer, Visitor>("Visitor", new InjectionConstructor(new VisitorValidation()));
-                    oUnitCont.RegisterType<ICustomer, Customer>("Customer", new InjectionConstructor(new CustomerValidation()));
-
-
                     //Or We can load the entities to be injected from the configuration file
                     // oUnitCont.LoadConfiguration();
+
+                    oUnitCont.RegisterType<ICustomer, Visitor>("Visitor", new InjectionConstructor(new VisitorValidation()));
+                    oUnitCont.RegisterType<ICustomer, Customer>("Customer", new InjectionConstructor(new CustomerValidation()));                                    
+
+                    
                 }
             }
             return oUnitCont.Resolve<INJECTTYPE>(Type.ToString()); //resolves to any type injected
 
         }
-
+        
     }
 }

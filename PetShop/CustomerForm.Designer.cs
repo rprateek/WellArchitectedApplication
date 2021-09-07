@@ -159,6 +159,7 @@ namespace PetShop
             this.cboCustType.Name = "cboCustType";
             this.cboCustType.Size = new System.Drawing.Size(121, 23);
             this.cboCustType.TabIndex = 11;
+            this.cboCustType.SelectedIndexChanged += new System.EventHandler(this.cboCustType_SelectedIndexChanged);
             // 
             // txtFullName
             // 
@@ -219,6 +220,7 @@ namespace PetShop
             this.Controls.Add(this.cmdAdd);
             this.Name = "frmCustomer";
             this.Text = "Customer Management";
+            this.Load += new System.EventHandler(this.frmCustomer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomerList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
