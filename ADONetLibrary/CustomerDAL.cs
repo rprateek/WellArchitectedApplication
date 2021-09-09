@@ -8,7 +8,7 @@ using Microsoft.Data.SqlClient;
 using Factory;
 namespace ADONetLibrary
 {
-    public class CustomerDAL : TemplateADO<ICustomer>
+    public class CustomerDAL : TemplateADO<CustomerBase>
     {
         public CustomerDAL(string _connStr):base( _connStr) // connection string to be passed to the template and base class
         {
@@ -18,17 +18,19 @@ namespace ADONetLibrary
         //We can now override the ExecuteCommand to use Customer specific execute query
         
         
-        protected override void ExecuteCommand(ICustomer obj)
+        protected override void ExecuteCommand(CustomerBase obj)
         {
             // A simple insert statement to insert into tblCustomer
             objCommand.CommandText = "Insert into tblCustomer(" +
                                       "FullName," +
+                                      "CustomerType," +
                                       "BillAmount," +
                                       "BillDate," +
                                       "PhoneNumber," +
                                       "Address)" +
                                       " values('" +
                                       obj.FullName + "','" +
+                                      obj.CustomerType + "','" +
                                       obj.BillAmount + "','" +
                                       obj.BillDate + "','" +
                                       obj.PhoneNumber + "','" +
@@ -36,20 +38,23 @@ namespace ADONetLibrary
             objCommand.ExecuteNonQuery();
         }
 
-        protected override List<ICustomer> ExecuteCommand()
+        protected override List<CustomerBase> ExecuteCommand()
         {
-            List<ICustomer> lstCust = new List<ICustomer>();
+            List<CustomerBase> lstCust = new List<CustomerBase>();
             objCommand.CommandText = "Select * from tblCustomer";
             SqlDataReader dr = null;
             dr = objCommand.ExecuteReader();
             while (dr.Read())
             {
                 // Now we need the Factory's help here to create the customer so that we can fill the information here. 
-                ICustomer objCust = Factory<ICustomer>.Create("Customer");
+                CustomerBase objCust = Factory<CustomerBase>.Create("Customer");
+                objCust.Id = Convert.ToInt32(dr["Id"]);
                 objCust.FullName = dr["FullName"].ToString();
+                objCust.FullName = dr["CustomerType"].ToString();
                 objCust.BillAmount = Convert.ToDecimal(dr["BillAmount"]);
-                objCust.BillDate = Convert.ToDateTime(dr["BillDate"].ToString());
+                objCust.BillDate = Convert.ToDateTime(dr["BillDate"]);
                 objCust.PhoneNumber = dr["PhoneNumber"].ToString();
+                objCust.Address = dr["Address"].ToString();
                 lstCust.Add(objCust);
             }
 

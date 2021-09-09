@@ -46,6 +46,8 @@ namespace PetShop
             this.txtBillAmount = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.dtBillDate = new System.Windows.Forms.DateTimePicker();
+            this.ddChooseDAL = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomerList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -181,6 +183,7 @@ namespace PetShop
             this.txtBillAmount.Name = "txtBillAmount";
             this.txtBillAmount.Size = new System.Drawing.Size(159, 23);
             this.txtBillAmount.TabIndex = 14;
+            this.txtBillAmount.Text = "0";
             // 
             // txtAddress
             // 
@@ -196,11 +199,34 @@ namespace PetShop
             this.dtBillDate.Size = new System.Drawing.Size(200, 23);
             this.dtBillDate.TabIndex = 16;
             // 
+            // ddChooseDAL
+            // 
+            this.ddChooseDAL.FormattingEnabled = true;
+            this.ddChooseDAL.Items.AddRange(new object[] {
+            "ADO.Net",
+            "Entity Framework"});
+            this.ddChooseDAL.Location = new System.Drawing.Point(57, 181);
+            this.ddChooseDAL.Name = "ddChooseDAL";
+            this.ddChooseDAL.Size = new System.Drawing.Size(85, 23);
+            this.ddChooseDAL.TabIndex = 17;
+            this.ddChooseDAL.SelectedIndexChanged += new System.EventHandler(this.ddChooseDAL_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(57, 163);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(72, 15);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Choose DAL";
+            // 
             // frmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.ddChooseDAL);
             this.Controls.Add(this.dtBillDate);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtBillAmount);
@@ -246,6 +272,8 @@ namespace PetShop
         private System.Windows.Forms.TextBox txtBillAmount;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.DateTimePicker dtBillDate;
+        private System.Windows.Forms.ComboBox ddChooseDAL;
+        private System.Windows.Forms.Label label7;
     }
 }
 

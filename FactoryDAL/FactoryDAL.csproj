@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ADONetLibrary\ADONetLibrary.csproj" />
     <ProjectReference Include="..\DataAccessLibrary\DataAccessLibrary.csproj" />
+    <ProjectReference Include="..\EFDALLibrary\EFDALLibrary.csproj" />
     <ProjectReference Include="..\InterfacesDAL\InterfacesDAL.csproj" />
   </ItemGroup>
 

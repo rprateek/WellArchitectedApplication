@@ -17,7 +17,7 @@ namespace Factory
     {
         static IUnityContainer oUnitCont = null;
        
-        public static INJECTTYPE Create(string Type) // will return whatever type is injected
+        public static INJECTTYPE Create(string CustType) // will return whatever type is injected
         {
             if (oUnitCont==null)
             {
@@ -28,13 +28,13 @@ namespace Factory
                     //Or We can load the entities to be injected from the configuration file
                     // oUnitCont.LoadConfiguration();
 
-                    oUnitCont.RegisterType<ICustomer, Visitor>("Visitor", new InjectionConstructor(new VisitorValidation()));
-                    oUnitCont.RegisterType<ICustomer, Customer>("Customer", new InjectionConstructor(new CustomerValidation()));                                    
+                    oUnitCont.RegisterType<CustomerBase, Visitor>("Visitor", new InjectionConstructor(new VisitorValidation()));
+                    oUnitCont.RegisterType<CustomerBase, Customer>("Customer", new InjectionConstructor(new CustomerValidation()));                                    
 
                     
                 }
             }
-            return oUnitCont.Resolve<INJECTTYPE>(Type.ToString()); //resolves to any type injected
+            return oUnitCont.Resolve<INJECTTYPE>(CustType.ToString()); //resolves to any type injected
 
         }
         

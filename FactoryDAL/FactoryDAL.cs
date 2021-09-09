@@ -3,7 +3,7 @@ using System.Configuration;
 using InterfacesDAL;
 using ADONetLibrary;
 using Interfaces;
-
+using EFDALLibrary;
 namespace FactoryDAL
 {
     public static class FactoryDAL<INJECTTYPE>
@@ -20,7 +20,8 @@ namespace FactoryDAL
                     
                     //Injecting the _connStr in the constructor as main base class Abstract Dal needs connection string to be injected in constructor.
                     string _connStr = GetConnectionString();
-                    oUnitCont.RegisterType<IDal<ICustomer>, CustomerDAL>("ADODal", new InjectionConstructor(_connStr));
+                    oUnitCont.RegisterType<IDal<CustomerBase>, CustomerDAL>("ADODal", new InjectionConstructor(_connStr));
+                    oUnitCont.RegisterType<IDal<CustomerBase>, EFCustomerDAL>("EFDal", new InjectionConstructor(_connStr));
 
                 }
             }
@@ -33,9 +34,8 @@ namespace FactoryDAL
         static private string GetConnectionString()
         {
             // To avoid storing the connection string in your code,
-            // you can retrieve it from a configuration file.
-            return "Data Source=localhost;Initial Catalog=PetShopDB;"
-                + "Integrated Security=true;";
+            // you can retrieve it from a configuration file.            
+            return ConfigurationManager.ConnectionStrings["Conn"].ConnectionString;
         }
 
     }

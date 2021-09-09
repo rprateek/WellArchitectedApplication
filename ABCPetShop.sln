@@ -13,13 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Factory", "CustomerFactory\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidationLogic", "ValidationAlgos\ValidationLogic.csproj", "{BFEC3055-7FE7-425B-A6AB-982032528808}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesDAL", "InterfacesDAL\InterfacesDAL.csproj", "{0AA35867-F897-47AE-9352-737BDB13429D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterfacesDAL", "InterfacesDAL\InterfacesDAL.csproj", "{0AA35867-F897-47AE-9352-737BDB13429D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLibrary", "DataAccessLibrary\DataAccessLibrary.csproj", "{176D0FFB-6AF5-4DD4-BE24-FBB09963C8EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLibrary", "DataAccessLibrary\DataAccessLibrary.csproj", "{176D0FFB-6AF5-4DD4-BE24-FBB09963C8EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADONetLibrary", "ADONetLibrary\ADONetLibrary.csproj", "{63913523-4AB7-4BDB-B779-1FBD88966F7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADONetLibrary", "ADONetLibrary\ADONetLibrary.csproj", "{63913523-4AB7-4BDB-B779-1FBD88966F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryDAL", "FactoryDAL\FactoryDAL.csproj", "{CC25C60C-E18D-4005-BABD-7C6A599090C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryDAL", "FactoryDAL\FactoryDAL.csproj", "{CC25C60C-E18D-4005-BABD-7C6A599090C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDALLibrary", "EFDALLibrary\EFDALLibrary.csproj", "{07FBBDB3-1BA4-4601-93A1-24105702F5AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{CC25C60C-E18D-4005-BABD-7C6A599090C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC25C60C-E18D-4005-BABD-7C6A599090C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC25C60C-E18D-4005-BABD-7C6A599090C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07FBBDB3-1BA4-4601-93A1-24105702F5AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07FBBDB3-1BA4-4601-93A1-24105702F5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07FBBDB3-1BA4-4601-93A1-24105702F5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07FBBDB3-1BA4-4601-93A1-24105702F5AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
