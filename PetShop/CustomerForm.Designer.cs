@@ -48,6 +48,7 @@ namespace PetShop
             this.dtBillDate = new System.Windows.Forms.DateTimePicker();
             this.ddChooseDAL = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.cmdUOW = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomerList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -220,11 +221,22 @@ namespace PetShop
             this.label7.TabIndex = 18;
             this.label7.Text = "Choose DAL";
             // 
+            // cmdUOW
+            // 
+            this.cmdUOW.Location = new System.Drawing.Point(628, 163);
+            this.cmdUOW.Name = "cmdUOW";
+            this.cmdUOW.Size = new System.Drawing.Size(123, 40);
+            this.cmdUOW.TabIndex = 19;
+            this.cmdUOW.Text = "Use UOW";
+            this.cmdUOW.UseVisualStyleBackColor = true;
+            this.cmdUOW.Click += new System.EventHandler(this.cmdUOW_Click);
+            // 
             // frmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cmdUOW);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.ddChooseDAL);
             this.Controls.Add(this.dtBillDate);
@@ -274,6 +286,7 @@ namespace PetShop
         private System.Windows.Forms.DateTimePicker dtBillDate;
         private System.Windows.Forms.ComboBox ddChooseDAL;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button cmdUOW;
     }
 }
 

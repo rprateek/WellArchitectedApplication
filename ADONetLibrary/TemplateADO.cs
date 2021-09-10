@@ -4,6 +4,7 @@ using InterfacesDAL;
 using System.Data;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
+using System.Configuration;
 
 namespace ADONetLibrary
 {
@@ -13,21 +14,39 @@ namespace ADONetLibrary
         protected SqlConnection objConn = null;
         protected SqlCommand objCommand = null;
 
-        //Pass Inject the connection string as required by the base class
-        public TemplateADO(string _connStr):base(_connStr)
+        IUow uowObj = null;
+        public override void SetUnitWOrk(IUow uow)
         {
-
-        }
-        private void OpenConn()
-        {
-            objConn = new SqlConnection(ConnectionString);
-            objConn.Open();
+            // In this one open the connection with transaction attacthed with it.    
+            uowObj = uow;            
+            objConn = ((AdoNetUow)uow).Connection;
             objCommand = new SqlCommand();
             objCommand.Connection = objConn;
+            objCommand.Transaction = ((AdoNetUow)uow).Transaction;
+            Save();
+
+        }
+        
+        
+        private void OpenConn()
+        {
+
+            if (objConn==null) // IF the transaction connection is not open then open a new connection without Transactoin
+            {
+                objConn = new SqlConnection(GetConnectionString());
+                objConn.Open();
+                objCommand = new SqlCommand();
+                objCommand.Connection = objConn;
+            }
+            
         }
         private void CloseConn()
         {
-            objConn.Close();
+            if (uowObj==null)
+            {
+                objConn.Close();
+            }
+            
         }
         
         //This will be overridden by the child class as per their sql execution queries.
@@ -62,12 +81,16 @@ namespace ADONetLibrary
                 Execute(obj);
             }
         }
-
         public override List<InjectType> Search()
         {
             return Execute();
         }
-
+        static private string GetConnectionString()
+        {
+            // To avoid storing the connection string in your code,
+            // you can retrieve it from a configuration file.            
+            return ConfigurationManager.ConnectionStrings["Conn"].ConnectionString;
+        }
     }
 
    

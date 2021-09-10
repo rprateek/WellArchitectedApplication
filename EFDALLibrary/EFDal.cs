@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EFDALLibrary
 {
     
-    public abstract class EFDalAbstract<INJECTTYPE> : DbContext, IDal<INJECTTYPE>
+    public abstract class EFDalAbstract<INJECTTYPE> : DbContext, IRepository<INJECTTYPE>
         where INJECTTYPE:class /// it is telling the that the type we are injecting is a class
     {
 
@@ -43,6 +43,11 @@ namespace EFDALLibrary
             return Set<INJECTTYPE>()
                 .AsQueryable<INJECTTYPE>()
                 .ToList<INJECTTYPE>();
+        }
+
+        public void SetUnitWOrk(IUow uow)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(INJECTTYPE obj)

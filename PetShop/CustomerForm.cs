@@ -11,6 +11,7 @@ namespace PetShop
     public partial class frmCustomer : Form
     {
         private CustomerBase iCust = null;
+        private string dbType = null;
         public frmCustomer()
         {
             InitializeComponent();
@@ -26,14 +27,14 @@ namespace PetShop
                 {
                     // Creating Idal object of type Icustomer from 
                     // Factory that returns IDal object of type ICustomer by requesting ADODal from Create method
-                    IDal<CustomerBase> dal = FactoryDAL<IDal<CustomerBase>>.Create("ADODal");
+                    IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create("ADODal");
                     dal.Add(iCust); // This is in memory addition 
                     dal.Save(); // this is physical commit. 
                     LoadGridADO();
                 }
                 else
                 {
-                    IDal<CustomerBase> dal = FactoryDAL<IDal<CustomerBase>>.Create("EFDal");
+                    IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create("EFDal");
                     dal.Add(iCust); // This is in memory addition 
                     dal.Save(); // this is physical commit. 
                     LoadGridEF();
@@ -80,13 +81,13 @@ namespace PetShop
 
         private void LoadGridADO()
         {
-            IDal<CustomerBase> dal = FactoryDAL<IDal<CustomerBase>>.Create("ADODal");
+            IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create("ADODal");
             List<CustomerBase> lstCusts = dal.Search();
             dgCustomerList.DataSource = lstCusts;
         }
         private void LoadGridEF()
         {
-            IDal<CustomerBase> dal = FactoryDAL<IDal<CustomerBase>>.Create("EFDal");
+            IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create("EFDal");
             List<CustomerBase> lstCusts = dal.Search();
             dgCustomerList.DataSource = lstCusts;
         }
@@ -94,7 +95,15 @@ namespace PetShop
         private void frmCustomer_Load(object sender, EventArgs e)
         {
             ddChooseDAL.SelectedIndex = 0;
-
+            if (ddChooseDAL.Text == "ADO.Net")
+            {
+                dbType = "ADODal";                
+            }
+            else
+            {
+                dbType = "EFDal";                
+            }
+            dtBillDate.Value = DateTime.Today;
             LoadGridADO();
         }
 
@@ -102,11 +111,58 @@ namespace PetShop
         {
             if (ddChooseDAL.Text == "ADO.Net")
             {
+                dbType = "ADODal";
                 LoadGridADO();
             }
             else
             {
+                dbType = "EFDal";
                 LoadGridEF();
+            }
+        }
+
+        private void cmdUOW_Click(object sender, EventArgs e)
+        {
+            IUow uow = FactoryDAL<IUow>.Create("AdoUOW"); // Factory creates the IUow object
+            try
+            {     
+                /// Here we are using mulitple Multiple Repositories to insert different customers. 
+                /// 
+                CustomerBase cust1 = new CustomerBase();
+                cust1.BillDate = DateTime.Today;
+                cust1.CustomerType = "Visitor";            
+                cust1.FullName = "Cust1";   
+                
+
+                IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create(dbType);
+                dal.SetUnitWOrk(uow);
+                dal.Add(cust1); // In memory Add 
+                dal.Save(); // we don't need this for uow
+
+
+                cust1 = new CustomerBase();
+                cust1.BillDate = DateTime.Today;
+                cust1.CustomerType = "OldCustomer";
+                cust1.FullName = "Cust2";
+                cust1.Address = "adsfasdfasdffdgsdfgsdfgdgfsdfgsdfgsdgfdsgfsdfgdsgfsdgfdsgfdsfgdsgfdsfgdsfgdsgfdsgfdsfgdsfgdsfg";
+                
+                IRepository<CustomerBase> dal1 = FactoryDAL<IRepository<CustomerBase>>.Create(dbType);
+                dal1.SetUnitWOrk(uow);
+                dal1.Add(cust1); // In Memory Add
+                                   dal1.Save();
+                /// Problem - with Repository pattern
+                /// First transaction will be inserted
+                /// second insert will have error due to Address length
+                /// 
+                uow.Commit(); // if successful then commit
+                LoadGridADO();
+                MessageBox.Show("Success");
+            }
+            catch (Exception ex)
+            {
+                uow.Rollback();// if error rollback
+                MessageBox.Show(ex.Message);
+
             }
         }
     }

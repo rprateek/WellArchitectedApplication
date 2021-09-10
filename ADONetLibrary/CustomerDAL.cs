@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using Interfaces; // We need business objects here to get them inserted in database
 using Microsoft.Data.SqlClient;
 using Factory;
+using InterfacesDAL;
 namespace ADONetLibrary
 {
-    public class CustomerDAL : TemplateADO<CustomerBase>
+    public class CustomerDAL : TemplateADO<CustomerBase>,IRepository<CustomerBase>
     {
-        public CustomerDAL(string _connStr):base( _connStr) // connection string to be passed to the template and base class
-        {
-
-        }
+      
 
         //We can now override the ExecuteCommand to use Customer specific execute query
         
@@ -50,7 +48,7 @@ namespace ADONetLibrary
                 CustomerBase objCust = Factory<CustomerBase>.Create("Customer");
                 objCust.Id = Convert.ToInt32(dr["Id"]);
                 objCust.FullName = dr["FullName"].ToString();
-                objCust.FullName = dr["CustomerType"].ToString();
+                objCust.CustomerType = dr["CustomerType"].ToString();
                 objCust.BillAmount = Convert.ToDecimal(dr["BillAmount"]);
                 objCust.BillDate = Convert.ToDateTime(dr["BillDate"]);
                 objCust.PhoneNumber = dr["PhoneNumber"].ToString();
@@ -62,4 +60,6 @@ namespace ADONetLibrary
 
         }
     }
+
+
 }
