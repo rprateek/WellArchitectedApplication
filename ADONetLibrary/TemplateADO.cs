@@ -23,7 +23,7 @@ namespace ADONetLibrary
             objCommand = new SqlCommand();
             objCommand.Connection = objConn;
             objCommand.Transaction = ((AdoNetUow)uow).Transaction;
-            Save();
+           
 
         }
         

@@ -17,6 +17,11 @@ namespace Interfaces
             // Creating the empty constructor just for EF Use 
             //EF cannot use the interface so we have to use this entity class as a workaround
             // We even made it normal class by removing abstract keyword
+            FullName = "";
+            PhoneNumber = "";
+            BillAmount = 0;
+            BillDate = DateTime.Now;
+            Address = "";
 
         }
 
@@ -36,6 +41,8 @@ namespace Interfaces
         public decimal BillAmount { get; set; }
         public DateTime BillDate { get; set; }
         public string Address { get; set; }
+
+       
         public virtual void Validate()
         {
             // Virtual function created so that it can be override by child class

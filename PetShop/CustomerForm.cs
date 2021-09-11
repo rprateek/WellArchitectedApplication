@@ -123,7 +123,8 @@ namespace PetShop
 
         private void cmdUOW_Click(object sender, EventArgs e)
         {
-            IUow uow = FactoryDAL<IUow>.Create("AdoUOW"); // Factory creates the IUow object
+            //IUow uow = FactoryDAL<IUow>.Create("AdoUOW"); // Factory creates the ADo.net unit of work object
+            IUow uow = FactoryDAL<IUow>.Create("EfUow"); // Factory creates the Entity framework Unit of work object
             try
             {     
                 /// Here we are using mulitple Multiple Repositories to insert different customers. 
@@ -135,21 +136,23 @@ namespace PetShop
                 
 
                 IRepository<CustomerBase> dal = FactoryDAL<IRepository<CustomerBase>>.Create(dbType);
+              
                 dal.SetUnitWOrk(uow);
                 dal.Add(cust1); // In memory Add 
-                dal.Save(); // we don't need this for uow
+                //dal.Save(); // we don't need this for uow
 
 
                 cust1 = new CustomerBase();
                 cust1.BillDate = DateTime.Today;
                 cust1.CustomerType = "OldCustomer";
                 cust1.FullName = "Cust2";
-                cust1.Address = "adsfasdfasdffdgsdfgsdfgdgfsdfgsdfgsdgfdsgfsdfgdsgfsdgfdsgfdsfgdsgfdsfgdsfgdsgfdsgfdsfgdsfgdsfg";
+                cust1.Address = "adsfasdfasdffdgsdfgsdfg   adsfsdfasd asdf asdfasd asdf asd";
                 
                 IRepository<CustomerBase> dal1 = FactoryDAL<IRepository<CustomerBase>>.Create(dbType);
+               
                 dal1.SetUnitWOrk(uow);
                 dal1.Add(cust1); // In Memory Add
-                                   dal1.Save();
+                //dal1.Save();
                 /// Problem - with Repository pattern
                 /// First transaction will be inserted
                 /// second insert will have error due to Address length
